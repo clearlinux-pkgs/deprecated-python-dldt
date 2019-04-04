@@ -4,7 +4,7 @@
 #
 Name     : deprecated-python-dldt
 Version  : 2018.r5
-Release  : 18
+Release  : 19
 URL      : https://github.com/opencv/dldt/archive/2018_R5.tar.gz
 Source0  : https://github.com/opencv/dldt/archive/2018_R5.tar.gz
 Summary  : @PACKAGE_DESCRIPTION@
@@ -12,7 +12,6 @@ Group    : Development/Tools
 License  : Apache-2.0 BSD-3-Clause MIT
 Requires: deprecated-python-dldt-license = %{version}-%{release}
 Requires: deprecated-python-dldt-python = %{version}-%{release}
-Requires: deprecated-python-dldt-python3 = %{version}-%{release}
 Requires: mxnet
 Requires: networkx
 Requires: numpy
@@ -66,19 +65,9 @@ license components for the deprecated-python-dldt package.
 %package python
 Summary: python components for the deprecated-python-dldt package.
 Group: Default
-Requires: deprecated-python-dldt-python3 = %{version}-%{release}
 
 %description python
 python components for the deprecated-python-dldt package.
-
-
-%package python3
-Summary: python3 components for the deprecated-python-dldt package.
-Group: Default
-Requires: python3-core
-
-%description python3
-python3 components for the deprecated-python-dldt package.
 
 
 %prep
@@ -108,7 +97,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1554326758
+export SOURCE_DATE_EPOCH=1554344204
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
@@ -140,6 +129,7 @@ install -m 0755 -D inference-engine/bin/intel64/RelWithDebInfo/lib/python_api/py
 install -m 0755 -D inference-engine/bin/intel64/RelWithDebInfo/lib/python_api/python3.7/openvino/inference_engine/dnn_builder/dnn_builder.so %{buildroot}/usr/lib/python3.7/site-packages/openvino/inference_engine/dnn_builder/dnn_builder.so
 install -m 0755 -D inference-engine/bin/intel64/RelWithDebInfo/lib/python_api/python2.7/openvino/inference_engine/ie_api.so %{buildroot}/usr/lib/python2.7/site-packages/openvino/inference_engine/ie_api.so
 install -m 0755 -D inference-engine/bin/intel64/RelWithDebInfo/lib/python_api/python2.7/openvino/inference_engine/dnn_builder/dnn_builder.so %{buildroot}/usr/lib/python2.7/site-packages/openvino/inference_engine/dnn_builder/dnn_builder.so
+rm -rf %{buildroot}/usr/lib/python3*/*
 ## install_append end
 
 %files
@@ -164,7 +154,3 @@ install -m 0755 -D inference-engine/bin/intel64/RelWithDebInfo/lib/python_api/py
 
 %files python
 %defattr(-,root,root,-)
-
-%files python3
-%defattr(-,root,root,-)
-/usr/lib/python3*/*
